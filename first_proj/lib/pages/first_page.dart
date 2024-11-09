@@ -3,15 +3,27 @@ import 'package:first_proj/pages/page_two.dart';
 import 'package:first_proj/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
-class FirstPage extends StatelessWidget {
+class FirstPage extends StatefulWidget {
   FirstPage({super.key});
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
   void userTapped() {
     print('Tapped!');
   }
 
 // pages
-  final List _pages = [HomePage(), SettingsPage(), ProfilePage()];
+  final List _pages = [
+    HomePage(),
+    ProfilePage(),
+    SettingsPage(),
+  ];
+
   int _currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     List names = ['Devin', "ben", 'Aaron'];
@@ -21,6 +33,12 @@ class FirstPage extends StatelessWidget {
         context,
         MaterialPageRoute(builder: (context) => SettingsPage()),
       );
+    }
+
+    void _navigationBottomBar(int index) {
+      setState(() {
+        (_currentPageIndex = index);
+      });
     }
 
     return Scaffold(
@@ -106,20 +124,23 @@ class FirstPage extends StatelessWidget {
       //     ),
       //   ),
       // ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_rounded),
-          label: 'Profile',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Settings',
-        ),
-      ]),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentPageIndex,
+          onTap: _navigationBottomBar,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_rounded),
+              label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ]),
     );
   }
 }
