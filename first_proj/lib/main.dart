@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
     List names = ['Devin', "ben", 'Aaron'];
     return MaterialApp(
       home: FirstPage(),
-      routes: {'/secondpage': (context) => PageTwo()},
+      routes: {
+        '/home': (context) => FirstPage(),
+        '/settings': (context) => SettingsPage(),
+      },
     );
   }
 }
