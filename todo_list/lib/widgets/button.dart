@@ -15,7 +15,9 @@ class BaseButton extends StatelessWidget {
       color: Theme.of(context).primaryColor,
       child: Text(
         title,
-        style: TextStyle(color: Theme.of(context).secondaryHeaderColor),
+        style: TextStyle(
+          color: Theme.of(context).secondaryHeaderColor,
+        ),
       ),
     );
   }
